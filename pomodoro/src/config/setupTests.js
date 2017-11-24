@@ -6,6 +6,13 @@ import React from 'react';
 
 configure({ adapter: new Adapter() });
 
+function assertOutput( actualParam, expectedParam ) {
+  return {
+    actual: actualParam,
+    expected: expectedParam
+  }
+}
+
 export {
-  shallow, mount, expect, React
+  shallow, mount, expect, React, assertOutput
 };
