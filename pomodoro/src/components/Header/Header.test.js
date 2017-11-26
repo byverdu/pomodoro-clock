@@ -28,6 +28,13 @@ describe( 'Header Component', () => {
     expect( assertClass.actual ).to.eq( assertClass.expected );
   });
 
+  it( 'has a title prop', () => {
+    const header = wrapper.prop('title');
+    const assert = assertOutput( typeof header, 'string' );
+
+    expect( assert.actual ).to.eq( assert.expected );
+  });
+
   it( 'has a heading 1 tag', () => {
     const header = wrapper.find('h1');
     const text = header.text();
