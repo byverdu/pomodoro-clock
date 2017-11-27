@@ -9,11 +9,12 @@ export default class Task extends Component {
   }
   
   get idAttribute() {
-    return `task-${this.props.count + 1}`;    
+    return `task${this.props.count + 1}`;    
   }
 
   onChangeHandler( event ) {
-    const parentClass = event.target.parentElement.classList;
+    const liRef = event.target.id;
+    const parentClass = this.refs[liRef].classList;
     if ( event.target.checked ) {
       parentClass.add('task-done');
     } else {
@@ -23,13 +24,13 @@ export default class Task extends Component {
 
   render() {
     return(
-      <li className={cssClassName('__task')}>
+      <li className={cssClassName('__task')} ref={this.idAttribute}>
         <label
           htmlFor={this.idAttribute}
           className={cssClassName('__task--label')}
         >
           <input
-            onChange={this.onChangeHandler}
+            onChange={this.onChangeHandler.bind(this)}
             type="checkbox"
             name="task"
             id={this.idAttribute}
