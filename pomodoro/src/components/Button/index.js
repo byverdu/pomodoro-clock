@@ -7,6 +7,7 @@ export default class Button extends Component {
       <button
         onClick={this.props.clickHandler}
         className={cssClassName('__button')}
+        disabled={this.props.disabled}
       >
       {this.props.text}
       </button>

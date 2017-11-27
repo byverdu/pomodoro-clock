@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Task from '../../components/Task';
+import ListTasks from '../../containers/ListTasks';
 
 class App extends Component {
   render() {
@@ -13,7 +14,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Task count={0} text="xoxooxoxox"></Task>
+        <ListTasks /> 
+        {/* <Task count={0} text="xoxooxoxox"></Task> */}
       </div>
     );
   }

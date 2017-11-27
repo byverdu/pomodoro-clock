@@ -3,7 +3,6 @@ import Button from './index';
 import {
   mount, React, expect, assertOutput, cssClassName
 } from '../../config/setupTests';
-import { wording } from '../../config/wording';
 
 let wrapper;
 
@@ -12,6 +11,7 @@ beforeEach(() => {
     <Button
       text="Click me!"
       clickHandler={() => {}}
+      disabled={false}
     />
   );
 });
@@ -49,5 +49,13 @@ describe( 'Button Component', () => {
 
     const assert = assertOutput( typeof button, 'function' );
     expect( assert.actual ).to.eq( assert.expected );  
+  });
+
+  it( 'has a disabled prop', () => {
+    const button = wrapper.prop('disabled');
+
+    const assert = assertOutput( typeof button, 'boolean' );
+    expect( assert.actual ).to.eq( assert.expected );  
+    expect( button ).to.eq( false );  
   });
 });
