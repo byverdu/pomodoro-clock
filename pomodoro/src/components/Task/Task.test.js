@@ -4,6 +4,7 @@ import {
   mount, React, expect, assertOutput, cssClassName
 } from '../../config/setupTests';
 import { wording } from '../../config/wording';
+import Button from '../Button/';
 
 let wrapper;
 
@@ -45,6 +46,25 @@ describe( 'Task Component', () => {
     expect( assertLength.actual ).to.eq( assertLength.expected );
     expect( assertClass.actual ).to.eq( assertClass.expected );
     expect( assertText.actual ).to.eq( assertText.expected );
+  });
+
+  it( 'has a Button Component', () => {
+    const button = wrapper.find(Button);
+
+    const assertLength = assertOutput( button.length, 1 );
+    const assertText = assertOutput(button.text(), 'Delete Task');
+
+    expect( assertLength.actual ).to.eq( assertLength.expected );
+    expect( assertText.actual ).to.eq( assertText.expected );
+  });
+
+  xit( 'Button Component deletes a Task', () => {
+    wrapper.find(Button).simulate('click');
+    const li = wrapper.find('li');
+    
+    const assertLength = assertOutput( li.length, 0 );
+
+    expect( assertLength.actual ).to.eq( assertLength.expected );
   });
 
   it( 'has a text prop', () => {
