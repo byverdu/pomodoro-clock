@@ -22,10 +22,10 @@ describe( 'ListTasks Component', () => {
 
   it( 'has a Button Component', () => {
     const button = wrapper.find(Button);
-    const text = button.text();    
+    const text = button.at(0).text();    
     
     const assertText = assertOutput(text, 'Add Task');    
-    const assertLength = assertOutput( button.length, 1 );
+    const assertLength = assertOutput( button.length, 2 );
     
     expect( assertLength.actual ).to.eq( assertLength.expected );
     expect( assertText.actual ).to.eq( assertText.expected );
