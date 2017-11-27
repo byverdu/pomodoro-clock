@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { cssClassName } from '../../config/wording';
 import './Task.css';
+import Button from '../Button/';
 
 export default class Task extends Component {
 
@@ -22,6 +23,10 @@ export default class Task extends Component {
     }
   }
 
+  deleteTask( id ) {
+    this.refs[id].remove();
+  }
+
   render() {
     return(
       <li className={cssClassName('__task')} ref={this.idAttribute}>
@@ -38,6 +43,10 @@ export default class Task extends Component {
           />
           {this.count} {this.props.text}
         </label>
+        <Button
+          text="Delete Task"
+          clickHandler={() => {this.deleteTask(this.idAttribute)}}
+        />
       </li>
     );
   }
