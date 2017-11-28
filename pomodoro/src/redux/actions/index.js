@@ -1,8 +1,23 @@
-export const ADD_TASK = 'ADD_TASK';
+const ADD_TASK = 'ADD_TASK';
+const DELETE_TASK = 'DELETE_TASK';
 
-export function addTask( task ) {
+function addTask( task ) {
   return {
     type: ADD_TASK,
     task
   }
-} 
+}
+
+function deleteTask( taskId ) {
+  return {
+    type: DELETE_TASK,
+    taskId
+  }
+}
+
+export {
+  ADD_TASK,
+  DELETE_TASK,
+  addTask,
+  deleteTask
+}
