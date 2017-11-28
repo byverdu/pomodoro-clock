@@ -24,7 +24,7 @@ describe( 'Actions', () => {
         .to.have.property( 'type' )
         .that.is.an( 'string' ).and.equal( 'ADD_TASK' );
     });
-    it( 'and a task prop equal to object', () => {
+    it( 'and a task prop that is an object', () => {
       expect( addTask({}))
         .to.have.property( 'task' )
         .that.is.an( 'object' );
@@ -47,7 +47,7 @@ describe( 'Actions', () => {
         .to.have.property( 'type' )
         .that.is.an( 'string' ).and.equal( 'DELETE_TASK' );
     });
-    it( 'and a task prop equal to object', () => {
+    it( 'and a task prop equal that is a number', () => {
       expect( deleteTask(0))
         .to.have.property( 'taskId' )
         .that.is.a( 'number' );
