@@ -3,7 +3,7 @@ import {
 } from '../../config/setupTests';
 
 import {
-  addTask, deleteTask
+  addTask, deleteTask, completedTask
 } from './index';
 
 describe( 'Actions', () => {
@@ -51,6 +51,29 @@ describe( 'Actions', () => {
       expect( deleteTask(0))
         .to.have.property( 'taskId' )
         .that.is.a( 'number' );
+    });
+  });
+  describe( 'completedTask action', () => {
+    it( 'is defined', () => {
+      expect( completedTask ).not.equal( undefined );
+    });
+    it( 'is a function', () => {
+      const assertType = assertOutput( typeof completedTask, 'function' );
+      expect( assertType.actual ).to.equal( assertType.expected );
+    });
+    it( 'returns and object', () => {
+      expect( completedTask())
+        .to.be.an( 'object' );
+    });
+    it( 'with a type prop equal to COMPLETED_TASK', () => {
+      expect( completedTask())
+        .to.have.property( 'type' )
+        .that.is.an( 'string' ).and.equal( 'COMPLETED_TASK' );
+    });
+    it( 'and a task prop equal that is a number', () => {
+      expect( completedTask(true))
+        .to.have.property( 'taskCompleted' )
+        .that.is.a( 'boolean' );
     });
   });
 });
