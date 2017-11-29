@@ -8,6 +8,9 @@ export function tasksReducer( state = initialState, action ) {
         action.task,
         ...state
       ];
+    case types.DELETE_TASK:
+      console.log(state, action.taskId)
+      return state.filter( task => task.taskId !== action.taskId );
     default:
       return initialState;
   }
