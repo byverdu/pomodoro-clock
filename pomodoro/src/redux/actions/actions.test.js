@@ -49,7 +49,7 @@ describe( 'Actions', () => {
     });
     it( 'and a task prop equal that is a number', () => {
       expect( deleteTask(0))
-        .to.have.property( 'taskId' )
+        .to.have.property( 'id' )
         .that.is.a( 'number' );
     });
   });
@@ -71,9 +71,14 @@ describe( 'Actions', () => {
         .that.is.an( 'string' ).and.equal( 'COMPLETED_TASK' );
     });
     it( 'and a task prop equal that is a number', () => {
-      expect( completedTask(true))
-        .to.have.property( 'taskCompleted' )
+      expect( completedTask( 1, true ))
+        .to.have.property( 'completed' )
         .that.is.a( 'boolean' );
+    });
+    it( 'and a task prop equal that is a number', () => {
+      expect( completedTask( 1, true))
+        .to.have.property( 'id' )
+        .that.is.a( 'number' );
     });
   });
 });

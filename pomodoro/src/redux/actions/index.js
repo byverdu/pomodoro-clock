@@ -9,17 +9,18 @@ function addTask( task ) {
   }
 }
 
-function deleteTask( taskId ) {
+function deleteTask( id ) {
   return {
     type: DELETE_TASK,
-    taskId
+    id
   }
 }
 
-function completedTask( taskCompleted ) {
+function completedTask( id, completed ) {
   return {
     type: COMPLETED_TASK,
-    taskCompleted
+    id,
+    completed
   }
 }
 

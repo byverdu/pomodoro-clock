@@ -8,9 +8,17 @@ export function tasksReducer( state = initialState, action ) {
         action.task,
         ...state
       ];
+
     case types.DELETE_TASK:
-      console.log(state, action.taskId)
-      return state.filter( task => task.taskId !== action.taskId );
+      return state.filter( task => task.id !== action.id );
+
+    case types.COMPLETED_TASK:
+    return state.map(task =>
+      (task.id === action.id) 
+        ? {...task, completed: action.completed}
+        : task
+    )
+
     default:
       return initialState;
   }
