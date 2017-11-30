@@ -5,8 +5,8 @@ export function tasksReducer( state = initialState, action ) {
   switch ( action.type ) {
     case types.ADD_TASK:
       return [
-        action.task,
-        ...state
+        ...state,
+        action.task
       ];
 
     case types.DELETE_TASK:

@@ -1,16 +1,24 @@
 /* global describe, beforeEach */
 import ListTasks from './index';
-import {
-  mount, React, expect, assertOutput, cssClassName
-} from '../../config/setupTests';
 import Button from '../../components/Button';
 import Task from '../../components/Task';
+import {
+  mount,
+  React,
+  expect,
+  assertOutput, 
+  cssClassName,
+  Provider,
+  store
+} from '../../config/setupTests';
 
 let wrapper;
 
 beforeEach(() => {
   wrapper = mount(
-    <ListTasks />
+    <Provider store={store}>    
+      <ListTasks />
+    </Provider>
   );
 });
 
