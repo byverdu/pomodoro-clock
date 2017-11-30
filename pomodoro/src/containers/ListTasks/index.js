@@ -54,6 +54,7 @@ export class ListTasks extends Component {
         <Task
           key={key}
           text={item.text}
+          completed={item.completed}
           id={key}
         />
       );

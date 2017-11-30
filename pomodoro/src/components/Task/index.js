@@ -23,18 +23,24 @@ export class Task extends Component {
   onChangeHandler( event ) {
     const eventTarget = event.target;
     const liRef = eventTarget.id;
-    const parentClass = this.refs[liRef].classList;
-    if ( eventTarget.checked ) {
-      parentClass.add('task-done');
-    } else {
-      parentClass.remove('task-done');
-    }
+    // const parentClass = this.refs[liRef].classList;
+    // if ( eventTarget.checked ) {
+    //   parentClass.add('task-done');
+    // } else {
+    //   parentClass.remove('task-done');
+    // }
     this.props.dispatch(
       actions.completedTask(
         this.getTaskPosition(liRef),
         eventTarget.checked
       )
     );
+  }
+
+  itemCompleted( completed ) {
+    return completed ?
+      'task-done' :
+      '';
   }
 
   deleteTask( id ) {
@@ -47,7 +53,7 @@ export class Task extends Component {
 
   render() {
     return(
-      <li className={cssClassName('__task')} ref={this.idAttribute}>
+      <li className={cssClassName('__task ') + this.itemCompleted(this.props.completed)} ref={this.idAttribute}>
         <label
           htmlFor={this.idAttribute}
           className={cssClassName('__task--label')}
@@ -56,6 +62,7 @@ export class Task extends Component {
             onChange={this.onChangeHandler.bind(this)}
             type="checkbox"
             name="task"
+            checked={this.props.completed}
             id={this.idAttribute}
             className={cssClassName('__task--check')}
           />
