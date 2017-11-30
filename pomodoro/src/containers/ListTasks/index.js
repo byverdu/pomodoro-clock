@@ -13,7 +13,7 @@ export class ListTasks extends Component {
       disableAddButton: false
     }
     this.addTaskHandler = this.addTaskHandler.bind(this);
-    // // this.deleteDoneTasksHandler = this.deleteDoneTasksHandler.bind(this);
+    this.deleteDoneTasksHandler = this.deleteDoneTasksHandler.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
@@ -31,7 +31,15 @@ export class ListTasks extends Component {
       id: this.props.tasks.length
     };
 
-    this.props.dispatch(actions.addTask(newTask));
+    this.props.dispatch(
+      actions.addTask(newTask)
+    );
+  }
+
+  deleteDoneTasksHandler() {
+    this.props.dispatch(
+      actions.deleteCompletedTasks()
+    );
   }
 
   handleKeyUp() {

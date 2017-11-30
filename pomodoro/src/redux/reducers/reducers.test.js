@@ -85,10 +85,15 @@ describe('tasks reducer', () => {
   });
   it('should handle DELETE_COMPLETED_TASKS for uncompleted', () => {
     const data = sampleData( true );
+    data[0].completed = false;
     const deleteCompletedTasks = {
       type: types.DELETE_COMPLETED_TASKS
     };
-    console.log(data)
-    expect(tasksReducer(data, deleteCompletedTasks )).to.have.length( 2 );
+    const newState = {
+      text: 'First Task',
+      completed: false,
+      id: 0
+    };
+    expect(tasksReducer(data, deleteCompletedTasks )).to.eql([ newState ]);
   });
 });

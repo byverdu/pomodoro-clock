@@ -20,7 +20,12 @@ export function tasksReducer( state = initialState, action ) {
       );
 
     case types.DELETE_COMPLETED_TASKS:
-      return 'pop';
+      return state
+        .filter( task => !task.completed )
+        .map(( newTask, index ) => {
+          newTask.id = index;
+          return newTask;
+        });
 
     default:
       return initialState;
