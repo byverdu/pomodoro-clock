@@ -83,7 +83,7 @@ describe('tasks reducer', () => {
 
     expect(expected[1]).to.eql( data.newState );
   });
-  it('should handle DELETE_COMPLETED_TASKS for uncompleted', () => {
+  it('should handle DELETE_COMPLETED_TASKS', () => {
     const data = sampleData( true );
     data[0].completed = false;
     const deleteCompletedTasks = {

@@ -11,27 +11,27 @@
 
 ## Involved Components
 
-### <Timer />
+### `<Timer />`
 
 We need a timer component that will be used in 3 scenarios, the pomodoro timer itself and keep track for the 2 different breaks.
 
-### <Button />
+### `<Button />`
 
 Potentially to start and stop the timer and reset the checkmarks.
 
-### <ListTask />
+### `<ListTask />`
 
 A list of tasks that is going to be completed during the day.
 
-### <Task />
+### `<Task />`
 
 Singular task that needs to be completed.
 
-### <CheckMark />
+### `<CheckMark />`
 
 Will be used either to keep track for the pomodoros used and tasks completed.
 
-### <Count />
+### `<Count />`
 
 To keep track how many iterions we have done
 
