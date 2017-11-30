@@ -2,25 +2,39 @@ import React, { Component } from 'react';
 import { cssClassName } from '../../config/wording';
 import './Task.css';
 import Button from '../Button/';
+import { connect } from 'react-redux';
+import { actions } from '../../redux';
 
-export default class Task extends Component {
+export class Task extends Component {
 
   get count() {
-    return `${this.props.count + 1}.`;
+    return `${this.props.id + 1}.`;
   }
   
   get idAttribute() {
-    return `task${this.props.count + 1}`;    
+    return `task${this.props.id + 1}`;    
+  }
+
+  getTaskPosition( idAttribute ) {
+    const position = idAttribute.split('').pop();
+    return ( position - 1 );
   }
 
   onChangeHandler( event ) {
-    const liRef = event.target.id;
+    const eventTarget = event.target;
+    const liRef = eventTarget.id;
     const parentClass = this.refs[liRef].classList;
-    if ( event.target.checked ) {
+    if ( eventTarget.checked ) {
       parentClass.add('task-done');
     } else {
       parentClass.remove('task-done');
     }
+    this.props.dispatch(
+      actions.completedTask(
+        this.getTaskPosition(liRef),
+        eventTarget.checked
+      )
+    );
   }
 
   deleteTask( id ) {
@@ -51,3 +65,11 @@ export default class Task extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    tasks: state.tasks
+  }
+}
+
+export default connect( mapStateToProps )( Task );

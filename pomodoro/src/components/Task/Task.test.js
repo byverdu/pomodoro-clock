@@ -1,7 +1,11 @@
 /* global describe, beforeEach */
-import Task from './index';
+import { Task } from './index';
 import {
-  mount, React, expect, assertOutput, cssClassName
+  mount,
+  React,
+  expect,
+  assertOutput, 
+  cssClassName
 } from '../../config/setupTests';
 import { wording } from '../../config/wording';
 import Button from '../Button/';
@@ -12,7 +16,7 @@ beforeEach(() => {
   wrapper = mount(
     <Task
       text="Finish unit test"
-      count={0}
+      id={0}
     />
   );
 });
@@ -74,8 +78,8 @@ describe( 'Task Component', () => {
     expect( assert.actual ).to.eq( assert.expected );
   });
 
-  it( 'has a count prop', () => {
-    const task = wrapper.prop('count');
+  it( 'has a id prop', () => {
+    const task = wrapper.prop('id');
     const assert = assertOutput( typeof task, 'number' );
 
     expect( assert.actual ).to.eq( assert.expected );

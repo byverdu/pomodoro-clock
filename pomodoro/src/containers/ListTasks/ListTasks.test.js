@@ -16,7 +16,7 @@ let wrapper;
 
 beforeEach(() => {
   wrapper = mount(
-    <Provider store={store}>    
+    <Provider store={store}>  
       <ListTasks />
     </Provider>
   );

@@ -28,7 +28,7 @@ export class ListTasks extends Component {
     const newTask = {
       text: this.refs.newTask.value,
       completed: false,
-      count: this.props.tasks.length
+      id: this.props.tasks.length
     };
 
     this.props.dispatch(actions.addTask(newTask));
@@ -46,7 +46,7 @@ export class ListTasks extends Component {
         <Task
           key={key}
           text={item.text}
-          count={key}
+          id={key}
         />
       );
     });
