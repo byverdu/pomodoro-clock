@@ -3,7 +3,7 @@ import {
 } from '../../config/setupTests';
 
 import {
-  addTask, deleteTask, completedTask
+  addTask, deleteTask, completedTask, deleteCompletedTasks
 } from './index';
 
 describe( 'Actions', () => {
@@ -79,6 +79,24 @@ describe( 'Actions', () => {
       expect( completedTask( 1, true))
         .to.have.property( 'id' )
         .that.is.a( 'number' );
+    });
+  });
+  describe( 'deleteCompletedTasks action', () => {
+    it( 'is defined', () => {
+      expect( deleteCompletedTasks ).not.equal( undefined );
+    });
+    it( 'is a function', () => {
+      const assertType = assertOutput( typeof deleteCompletedTasks, 'function' );
+      expect( assertType.actual ).to.equal( assertType.expected );
+    });
+    it( 'returns and object', () => {
+      expect( deleteCompletedTasks())
+        .to.be.an( 'object' );
+    });
+    it( 'with a type prop equal to DELETE_COMPLETED_TASKS', () => {
+      expect( deleteCompletedTasks())
+        .to.have.property( 'type' )
+        .that.is.an( 'string' ).and.equal( 'DELETE_COMPLETED_TASKS' );
     });
   });
 });

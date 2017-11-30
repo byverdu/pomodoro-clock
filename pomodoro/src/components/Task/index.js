@@ -38,7 +38,11 @@ export class Task extends Component {
   }
 
   deleteTask( id ) {
-    this.refs[id].remove();
+    this.props.dispatch(
+      actions.deleteTask(
+        this.getTaskPosition( id )
+      )
+    );
   }
 
   render() {

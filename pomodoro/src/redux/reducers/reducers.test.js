@@ -4,24 +4,29 @@ import {
   expect, assertOutput
 } from '../../config/setupTests';
 
-function sampleData() {
+function sampleData( completed ) {
   return [
     {
       text: 'First Task',
-      completed: false,
+      completed,
       id: 0
     },
     {
       text: 'Second Task',
-      completed: false,
+      completed,
       id: 1
+    },
+    {
+      text: 'Third Task',
+      completed,
+      id: 2
     }
   ];
 }
 
 function completedTaskSample( completed ) {
   return {
-    state: sampleData(),
+    state: sampleData( false ),
     completedTask: {
       type: types.COMPLETED_TASK,
       id: 1,
@@ -54,7 +59,7 @@ describe('tasks reducer', () => {
     expect(tasksReducer([], newTask )).to.eql([ newTask.task ]);
   });
   it('should handle DELETE_TASK', () => {
-    const state = sampleData();
+    const state = sampleData( false );
     const newState = {
       text: 'First Task',
       completed: false,
@@ -64,7 +69,7 @@ describe('tasks reducer', () => {
       type: types.DELETE_TASK,
       id: 1
     };
-    expect(tasksReducer(state, deleteTask )).to.eql([ newState ]);
+    expect(tasksReducer(state, deleteTask )).to.have.length( 2 );
   });
   it('should handle COMPLETED_TASK for completed', () => {
     const data = completedTaskSample( true );
@@ -77,5 +82,13 @@ describe('tasks reducer', () => {
     const expected = tasksReducer(data.state, data.completedTask );
 
     expect(expected[1]).to.eql( data.newState );
+  });
+  it('should handle DELETE_COMPLETED_TASKS for uncompleted', () => {
+    const data = sampleData( true );
+    const deleteCompletedTasks = {
+      type: types.DELETE_COMPLETED_TASKS
+    };
+    console.log(data)
+    expect(tasksReducer(data, deleteCompletedTasks )).to.have.length( 2 );
   });
 });

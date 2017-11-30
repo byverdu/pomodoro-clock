@@ -13,11 +13,14 @@ export function tasksReducer( state = initialState, action ) {
       return state.filter( task => task.id !== action.id );
 
     case types.COMPLETED_TASK:
-    return state.map(task =>
-      (task.id === action.id) 
-        ? {...task, completed: action.completed}
-        : task
-    )
+      return state.map(task =>
+        (task.id === action.id) 
+          ? {...task, completed: action.completed}
+          : task
+      );
+
+    case types.DELETE_COMPLETED_TASKS:
+      return 'pop';
 
     default:
       return initialState;
