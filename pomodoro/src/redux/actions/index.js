@@ -2,6 +2,7 @@ const ADD_TASK = 'ADD_TASK';
 const DELETE_TASK = 'DELETE_TASK';
 const COMPLETED_TASK = 'COMPLETED_TASK';
 const DELETE_COMPLETED_TASKS = 'DELETE_COMPLETED_TASKS';
+const START_TIMER = 'START_TIMER';
 
 function addTask( task ) {
   return {
@@ -31,13 +32,22 @@ function deleteCompletedTasks() {
   }
 }
 
+function startTimer( timerType ) {
+  return {
+    type: START_TIMER,
+    timerType
+  }
+}
+
 export {
   ADD_TASK,
   DELETE_TASK,
   COMPLETED_TASK,
   DELETE_COMPLETED_TASKS,
+  START_TIMER,
   addTask,
   deleteTask,
   completedTask,
-  deleteCompletedTasks
+  deleteCompletedTasks,
+  startTimer
 }

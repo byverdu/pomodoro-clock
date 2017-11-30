@@ -3,10 +3,14 @@ import {
 } from '../../config/setupTests';
 
 import {
-  addTask, deleteTask, completedTask, deleteCompletedTasks
+  addTask,
+  deleteTask,
+  completedTask,
+  deleteCompletedTasks,
+  startTimer
 } from './index';
 
-describe( 'Actions', () => {
+describe( 'Tasks Actions', () => {
   describe( 'addTask action', () => {
     it( 'is defined', () => {
       expect( addTask ).not.equal( undefined );
@@ -97,6 +101,34 @@ describe( 'Actions', () => {
       expect( deleteCompletedTasks())
         .to.have.property( 'type' )
         .that.is.an( 'string' ).and.equal( 'DELETE_COMPLETED_TASKS' );
+    });
+  });
+});
+
+describe( 'Timer Actions', () => {
+  describe( 'startTimer action', () => {
+    it( 'is defined', () => {
+      expect( startTimer ).not.equal( undefined );
+    });
+    it( 'is a function', () => {
+      const assertType = assertOutput( typeof startTimer, 'function' );
+      expect( assertType.actual ).to.equal( assertType.expected );
+    });
+    it( 'returns and object', () => {
+      expect( startTimer())
+        .to.be.an( 'object' );
+    });
+    it( 'with a type prop equal to ADD_TASK', () => {
+      expect( startTimer())
+        .to.have.property( 'type' )
+        .that.is.an( 'string' )
+        .and.equal( 'START_TIMER' );
+    });
+    it( 'and a task prop that is an object', () => {
+      expect( startTimer( 'pomodoro' ))
+        .to.have.property( 'timerType' )
+        .that.is.an( 'string' )
+        .and.equal( 'pomodoro' );
     });
   });
 });

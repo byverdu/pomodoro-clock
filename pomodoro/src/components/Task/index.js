@@ -23,12 +23,7 @@ export class Task extends Component {
   onChangeHandler( event ) {
     const eventTarget = event.target;
     const liRef = eventTarget.id;
-    // const parentClass = this.refs[liRef].classList;
-    // if ( eventTarget.checked ) {
-    //   parentClass.add('task-done');
-    // } else {
-    //   parentClass.remove('task-done');
-    // }
+
     this.props.dispatch(
       actions.completedTask(
         this.getTaskPosition(liRef),
