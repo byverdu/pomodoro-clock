@@ -1,7 +1,11 @@
 import * as types from '../actions/';
-const initialState = [];
 
-export function tasksReducer( state = initialState, action ) {
+const tasksInitialState = [];
+const timerInitialState = {
+  counter: 0
+};
+
+function tasksReducer( state = tasksInitialState, action ) {
   switch ( action.type ) {
     case types.ADD_TASK:
       return [
@@ -28,6 +32,21 @@ export function tasksReducer( state = initialState, action ) {
         });
 
     default:
-      return initialState;
+      return state;
   }
+}
+
+function timerReducer( state = timerInitialState, action ) {
+  switch ( action.type ) {
+    case types.START_TIMER:
+      const newCounter = state.counter + 1;
+      return Object.assign(state, {counter: newCounter});
+    default:
+      return state;
+  }
+}
+
+export {
+  tasksReducer,
+  timerReducer
 }

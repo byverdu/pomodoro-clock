@@ -32,10 +32,9 @@ function deleteCompletedTasks() {
   }
 }
 
-function startTimer( timerType ) {
+function startTimer() {
   return {
-    type: START_TIMER,
-    timerType
+    type: START_TIMER
   }
 }
 

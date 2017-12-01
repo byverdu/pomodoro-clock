@@ -1,10 +1,10 @@
-import { tasksReducer } from '../reducers';
+import { tasksReducer, timerReducer } from '../reducers';
 import * as types from '../actions/';
 import {
   expect, assertOutput
 } from '../../config/setupTests';
 
-function sampleData( completed ) {
+function sampleDataTasks( completed ) {
   return [
     {
       text: 'First Task',
@@ -26,7 +26,7 @@ function sampleData( completed ) {
 
 function completedTaskSample( completed ) {
   return {
-    state: sampleData( false ),
+    state: sampleDataTasks( false ),
     completedTask: {
       type: types.COMPLETED_TASK,
       id: 1,
@@ -38,6 +38,12 @@ function completedTaskSample( completed ) {
       id: 1
     }
   }
+}
+
+function sampleDataTime() {
+  return {
+    counter: 0
+  };
 }
 
 describe('tasks reducer', () => {
@@ -59,7 +65,7 @@ describe('tasks reducer', () => {
     expect(tasksReducer([], newTask )).to.eql([ newTask.task ]);
   });
   it('should handle DELETE_TASK', () => {
-    const state = sampleData( false );
+    const state = sampleDataTasks( false );
     const newState = {
       text: 'First Task',
       completed: false,
@@ -84,7 +90,7 @@ describe('tasks reducer', () => {
     expect(expected[1]).to.eql( data.newState );
   });
   it('should handle DELETE_COMPLETED_TASKS', () => {
-    const data = sampleData( true );
+    const data = sampleDataTasks( true );
     data[0].completed = false;
     const deleteCompletedTasks = {
       type: types.DELETE_COMPLETED_TASKS
@@ -95,5 +101,23 @@ describe('tasks reducer', () => {
       id: 0
     };
     expect(tasksReducer(data, deleteCompletedTasks )).to.eql([ newState ]);
+  });
+});
+
+describe('timer reducer', () => {
+  it( 'is defined', () => {
+    expect( timerReducer ).not.equal( undefined );
+  });
+  it('should return the initial state', () => {
+    const timerState = sampleDataTime();
+    expect(timerReducer(undefined, {})).to.eql( timerState );
+  });
+  it('should handle START_TIMER for a pomodoro timer', () => {
+    const timerState = sampleDataTime();
+    const startTimer = {
+      type: types.START_TIMER
+    };
+    expect(timerReducer(timerState, startTimer )).to.eql({counter: 1});
+    expect(timerReducer(timerState, startTimer )).to.eql({counter: 2});
   });
 });
