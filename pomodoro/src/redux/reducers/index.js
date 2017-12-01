@@ -41,6 +41,11 @@ function timerReducer( state = timerInitialState, action ) {
     case types.START_TIMER:
       const newCounter = state.counter + 1;
       return Object.assign(state, {counter: newCounter});
+    case types.END_TIMER:
+      if ( action.counter === 4 ) {
+        return Object.assign(state, {counter: 0});
+      }
+      return;
     default:
       return state;
   }

@@ -7,7 +7,8 @@ import {
   deleteTask,
   completedTask,
   deleteCompletedTasks,
-  startTimer
+  startTimer,
+  endTimer
 } from './index';
 
 describe( 'Tasks Actions', () => {
@@ -118,17 +119,43 @@ describe( 'Timer Actions', () => {
       expect( startTimer())
         .to.be.an( 'object' );
     });
-    it( 'with a type prop equal to ADD_TASK', () => {
+    it( 'with a type prop equal to START_TIMER', () => {
       expect( startTimer())
         .to.have.property( 'type' )
         .that.is.an( 'string' )
         .and.equal( 'START_TIMER' );
     });
-    it( 'and a task prop that is an object', () => {
+    xit( 'and a task prop that is an object', () => {
       expect( startTimer( 'pomodoro' ))
         .to.have.property( 'timerType' )
         .that.is.an( 'string' )
         .and.equal( 'pomodoro' );
+    });
+  });
+
+  describe( 'endTimer action', () => {
+    it( 'is defined', () => {
+      expect( endTimer ).not.equal( undefined );
+    });
+    it( 'is a function', () => {
+      const assertType = assertOutput( typeof endTimer, 'function' );
+      expect( assertType.actual ).to.equal( assertType.expected );
+    });
+    it( 'returns and object', () => {
+      expect( endTimer())
+        .to.be.an( 'object' );
+    });
+    it( 'with a type prop equal to END_TIMER', () => {
+      expect( endTimer())
+        .to.have.property( 'type' )
+        .that.is.an( 'string' )
+        .and.equal( 'END_TIMER' );
+    });
+    xit( 'and a task prop that is an object', () => {
+      expect( endTimer( 2 ))
+        .to.have.property( 'counter' )
+        .that.is.an( 'number' )
+        .and.equal( 2 );
     });
   });
 });

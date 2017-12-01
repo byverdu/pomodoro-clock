@@ -120,4 +120,16 @@ describe('timer reducer', () => {
     expect(timerReducer(timerState, startTimer )).to.eql({counter: 1});
     expect(timerReducer(timerState, startTimer )).to.eql({counter: 2});
   });
+  it('should handle END_TIMER action', () => {
+    const timerState = sampleDataTime();
+    const endTimer = {
+      type: types.END_TIMER,
+      counter: 4
+    };
+    const startTimer = {
+      type: types.START_TIMER
+    };
+    expect(timerReducer(timerState, endTimer )).to.eql({counter: 0});
+    expect(timerReducer(timerState, startTimer )).to.eql({counter: 1});
+  });
 });
