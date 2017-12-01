@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { cssClassName } from '../../config/wording';
 import Button from '../Button';
 
