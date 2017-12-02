@@ -118,7 +118,7 @@ describe('timer reducer', () => {
     const timerState = sampleDataTime();
     const startTimer = {
       type: types.START_TIMER,
-      timerType: 'long'
+      timerType: 'pomodoro'
     };
 
     expect(timerReducer(timerState, startTimer ).counter).to.eql( 1 );
@@ -130,7 +130,7 @@ describe('timer reducer', () => {
     };
     const startTimer = {
       type: types.START_TIMER,
-      timerType: 'long'      
+      timerType: 'pomodoro'      
     };
     expect(timerReducer(timerState, endTimer ).counter).to.eql( 0 );
     expect(timerReducer(timerState, startTimer ).counter).to.eql( 1 );

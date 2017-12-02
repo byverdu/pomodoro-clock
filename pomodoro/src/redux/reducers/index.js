@@ -42,8 +42,11 @@ function timerReducer( state = timerInitialState, action ) {
   switch ( action.type ) {
     case types.START_TIMER:
     {
+      const newCounter = (action.timerType === 'pomodoro') ?
+        state.counter + 1 :
+        state.counter;
       const newState = {
-        counter: state.counter + 1,
+        counter: newCounter,
         timerType: action.timerType,
         disabled: true
       }

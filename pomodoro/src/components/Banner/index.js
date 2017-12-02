@@ -7,11 +7,13 @@ export default class Banner extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.closeBanner();
-    }, 10000);
+    }, 10000);    
   }
 
   closeBanner() {
-    this.refs.banner.remove();
+    if (this.refs.banner) {
+      this.refs.banner.style.display = 'none';
+    }
   }
 
   render() {

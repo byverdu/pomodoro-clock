@@ -2,10 +2,30 @@ import React, { Component } from 'react';
 import { cssClassName } from '../../config/wording';
 import Timer from '../../components/Timer';
 import Button from '../../components/Button';
+import Banner from '../../components/Banner';
 import { connect } from 'react-redux';
 import { actions } from '../../redux';
 
 class DashTimer extends Component {
+  constructor( props ) {
+    super( props );
+    this.state = {
+      renderBanner: false
+    }
+  }
+
+  get disabled() {
+    return this.props.timers.disabled;
+  }
+
+  get counter() {
+    return this.props.timers.counter;
+  }
+
+  isPomodoroTimer() {
+    const timerType = this.props.timers.timerType
+    return timerType === 'pomodoro' || timerType === '';
+  }
 
   inputsRenderer() {
     const labels = [
@@ -39,28 +59,46 @@ class DashTimer extends Component {
     });
   }
 
+  bannerRenderer( counter ) {
+    const bannerText = counter === 0 ?
+      'Time for a long break' :
+      'Time for a short break';
+    
+      if (!this.disabled && this.state.renderBanner && this.isPomodoroTimer()) {
+        return(
+          <Banner text={bannerText} />
+        );
+      } else {
+        return null;
+      }
+  }
+
   startTimer() {
     const activeRadio = Array
       .from(document.getElementsByName('timerType'))
       .filter( elem => elem.checked ).pop();
 
     if ( activeRadio ) {
-      this.props.dispatch( actions.startTimer(activeRadio.value));
+      this.props.dispatch(
+        actions.startTimer(activeRadio.value)
+      );
+      this.setState({renderBanner: true})
     }
   }
 
   render() {
     return(
       <div className={cssClassName( '__dashTimer' )}>
+        {this.bannerRenderer(this.counter)}
         { this.inputsRenderer() }
         <Button
           text="Start Timer"
           clickHandler={ this.startTimer.bind( this )}
-          disabled={ this.props.timers.disabled }
+          disabled={ this.disabled }
         />
         <Timer />
         <h3>
-          Pomodoro Counter: {this.props.timers.counter}
+          Pomodoro Counter: {this.counter}
         </h3>
         
       </div>

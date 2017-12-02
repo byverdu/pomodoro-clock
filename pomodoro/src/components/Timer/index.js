@@ -11,9 +11,9 @@ class Timer extends Component {
 
   getTimerToRun( name ) {
     const timers = {
-      pomodoro: 0.2,
-      long: 0.3,
-      short: 0.1
+      pomodoro: 25,
+      long: 20,
+      short: 5
     }
 
     return timers[ name ]; 
