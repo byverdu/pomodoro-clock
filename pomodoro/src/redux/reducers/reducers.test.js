@@ -42,7 +42,9 @@ function completedTaskSample( completed ) {
 
 function sampleDataTime() {
   return {
-    counter: 0
+    counter: 0,
+    timerType: '',
+    disabled: false 
   };
 }
 
@@ -115,21 +117,22 @@ describe('timer reducer', () => {
   it('should handle START_TIMER for a pomodoro timer', () => {
     const timerState = sampleDataTime();
     const startTimer = {
-      type: types.START_TIMER
+      type: types.START_TIMER,
+      timerType: 'long'
     };
-    expect(timerReducer(timerState, startTimer )).to.eql({counter: 1});
-    expect(timerReducer(timerState, startTimer )).to.eql({counter: 2});
+
+    expect(timerReducer(timerState, startTimer ).counter).to.eql( 1 );
   });
   it('should handle END_TIMER action', () => {
     const timerState = sampleDataTime();
     const endTimer = {
-      type: types.END_TIMER,
-      counter: 4
+      type: types.END_TIMER
     };
     const startTimer = {
-      type: types.START_TIMER
+      type: types.START_TIMER,
+      timerType: 'long'      
     };
-    expect(timerReducer(timerState, endTimer )).to.eql({counter: 0});
-    expect(timerReducer(timerState, startTimer )).to.eql({counter: 1});
+    expect(timerReducer(timerState, endTimer ).counter).to.eql( 0 );
+    expect(timerReducer(timerState, startTimer ).counter).to.eql( 1 );
   });
 });

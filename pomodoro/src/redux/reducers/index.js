@@ -2,7 +2,9 @@ import * as types from '../actions/';
 
 const tasksInitialState = [];
 const timerInitialState = {
-  counter: 0
+  counter: 0,
+  timerType: '',
+  disabled: false 
 };
 
 function tasksReducer( state = tasksInitialState, action ) {
@@ -39,17 +41,30 @@ function tasksReducer( state = tasksInitialState, action ) {
 function timerReducer( state = timerInitialState, action ) {
   switch ( action.type ) {
     case types.START_TIMER:
-      const newCounter = state.counter + 1;
-      return Object.assign(state, {counter: newCounter});
+    {
+      const newState = {
+        counter: state.counter + 1,
+        timerType: action.timerType,
+        disabled: true
+      }
+      return Object.assign({}, state, newState);
+    }
 
     case types.END_TIMER:
-      if ( action.counter === 4 ) {
-        return Object.assign(state, {counter: 0});
+    {
+      if ( state.counter === 4 ) {
+        const newState = {
+          counter: 0,
+          timerType: '',
+          disabled: false
+        }
+        return Object.assign({}, state, newState);
       }
-      return;
+      return Object.assign({}, state, { disabled: false });
+    }
 
-      default:
-      return state;
+    default:
+    return state;
   }
 }
 

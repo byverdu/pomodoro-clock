@@ -33,16 +33,16 @@ function deleteCompletedTasks() {
   }
 }
 
-function startTimer() {
+function startTimer( timerType ) {
   return {
-    type: START_TIMER
+    type: START_TIMER,
+    timerType
   }
 }
 
-function endTimer( counter ) {
+function endTimer() {
   return {
-    type: END_TIMER,
-    counter
+    type: END_TIMER
   }
 }
 

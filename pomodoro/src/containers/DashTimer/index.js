@@ -2,23 +2,16 @@ import React, { Component } from 'react';
 import { cssClassName } from '../../config/wording';
 import Timer from '../../components/Timer';
 import Button from '../../components/Button';
+import { connect } from 'react-redux';
+import { actions } from '../../redux';
 
-export default class DashTimer extends Component {
-
-  constructor( props ) {
-    super( props );
-    this.state = {
-      timer: 0,
-      timeStarted: false
-    }
-    this.startTimer = this.startTimer.bind( this );
-  }
+class DashTimer extends Component {
 
   inputsRenderer() {
     const labels = [
-      { text: 'pomodoro', value: 1 },
-      { text: 'short', value: 1 },
-      { text: 'long', value: 1 }
+      { text: 'pomodoro' },
+      { text: 'short' },
+      { text: 'long' }
     ];
 
     const textBuilder = ( text ) => {
@@ -37,7 +30,7 @@ export default class DashTimer extends Component {
             type="radio"
             name="timerType"
             id={label.text}
-            value={label.value}
+            value={label.text}
           />
           <span>{ textBuilder( label.text )}</span>
         </label>
@@ -47,13 +40,12 @@ export default class DashTimer extends Component {
   }
 
   startTimer() {
-    const activeRadio = Array.from(document.getElementsByName('timerType')).filter( elem => elem.checked ).pop();
+    const activeRadio = Array
+      .from(document.getElementsByName('timerType'))
+      .filter( elem => elem.checked ).pop();
 
     if ( activeRadio ) {
-      this.setState({
-        timer: Number(activeRadio.value),
-        timeStarted: true
-      });
+      this.props.dispatch( actions.startTimer(activeRadio.value));
     }
   }
 
@@ -63,13 +55,23 @@ export default class DashTimer extends Component {
         { this.inputsRenderer() }
         <Button
           text="Start Timer"
-          clickHandler={this.startTimer}
+          clickHandler={ this.startTimer.bind( this )}
+          disabled={ this.props.timers.disabled }
         />
-        <Timer 
-          timer={this.state.timer}
-          timeStarted={this.state.timeStarted}/>
+        <Timer />
+        <h3>
+          Pomodoro Counter: {this.props.timers.counter}
+        </h3>
         
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    timers: state.timers
+  }
+}
+
+export default connect( mapStateToProps )( DashTimer );

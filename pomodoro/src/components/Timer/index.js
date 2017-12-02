@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
 import { cssClassName } from '../../config/wording';
+import { connect } from 'react-redux';
+import { actions } from '../../redux';
 
-export default class Timer extends Component {
+class Timer extends Component {
+
+  constructor( props ) {
+    super( props );
+  }
+
+  getTimerToRun( name ) {
+    const timers = {
+      pomodoro: 0.2,
+      long: 0.3,
+      short: 0.1
+    }
+
+    return timers[ name ]; 
+  }
 
   runInterval(
     time, minutesRef, secondsRef
@@ -12,10 +28,11 @@ export default class Timer extends Component {
       return timer < 10 ? `0${timer}` : timer;
     }
    
-    const interval = setInterval(function() {
+    const interval = setInterval(() => {
       minutesToMiliSeconds --;
       if (minutesToMiliSeconds <= 0) {
         clearInterval(interval);
+        this.props.dispatch( actions.endTimer());
       }
       let newSecondsTimer = Math.floor((minutesToMiliSeconds % 60));
       let newMinutesTimer = Math.floor((minutesToMiliSeconds / 60));
@@ -24,16 +41,15 @@ export default class Timer extends Component {
     }, 1000);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps, nextState)
-    if(nextProps.timeStarted) {
+  shouldComponentUpdate( nextProps, nextState) {
+    if ( nextProps.timers.timerType !== '' && nextProps.timers.disabled ) {
       this.runInterval(
-        nextProps.timer,
+        this.getTimerToRun(nextProps.timers.timerType),
         this.refs.minutes,
         this.refs.seconds
       );
     }
-    return nextProps.timeStarted;
+    return nextProps.timers.timerType !== '';
   }
 
   render() {
@@ -57,3 +73,11 @@ export default class Timer extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    timers: state.timers
+  }
+}
+
+export default connect( mapStateToProps )( Timer );

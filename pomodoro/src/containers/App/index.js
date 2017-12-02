@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import { runInterval } from '../../config/utils';
 
 import Task from '../../components/Task';
 import ListTasks from '../../containers/ListTasks';
+import Banner from '../../components/Banner';
+import DashTimer from '../../containers/DashTimer';
 
 class App extends Component {
-  runIntervalHandler() {
-    runInterval(5, this.refs.minutes, this.refs.seconds);
-  }
   render() {
     return (
       <div className="App">
@@ -16,13 +14,10 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="App-intro">
-          <button onClick={() => {this.runIntervalHandler()}}>Timer</button>
-          Timer
-          <div ref="minutes"></div>
-          <div ref="seconds"></div>
+          <DashTimer />
         </div>
         <ListTasks /> 
-        {/* <Task count={0} text="xoxooxoxox"></Task> */}
+        <Banner text="holly molly"></Banner>
       </div>
     );
   }
